@@ -1,0 +1,36 @@
+<%- include("header") -%>
+
+    <div class="box" id="heading">
+        <h1>
+            <%= listTitle %> !
+        </h1>
+    </div>
+
+    <div class="box">
+        <% for(let i=0; i < itemsList.length; i++){ %>
+            <form action="/delete" method="post">
+                <!-- this rotue will be responsible for deleting items-->
+                <div class="item">
+        <input type="checkbox" name = "itemToDelete" onChange = "this.form.submit()" value = "<%=itemsList[i]._id%>">
+                    <p>
+                        <%=itemsList[i].name%>
+                    </p>
+                    <!--itemsList[i] ka i apna document hoga jisme id wagher sab hoga pr hume sirf name chaiye isliye -->
+                </div>
+            </form>
+            <!-- in this form there is nothing like submit so how will our form be submitted , well we can use
+            onChange("this.form.submit()") on our checkbox -->
+            <!-- checkBox ka name dene se kuch nhi hoga bcoz item ki value yeh store nhi krrha so we will give it a value by for each() loop so each checkbox will get the document ki id  -->
+            <% } %>
+
+                <form action="/" method="post" class="item">
+                    <input type="text" name="listItem" placeholder="Add Your Task" autocomplete="off">
+                    <button type="submit" name="listButton" value="<%= listTitle %>">+</button>
+                    <!-- name and value of button are like key value pair in req.body so we can use this property to manipulate the list depending upon the value of button if it is worklist then will populate the workItems array or if it is Date wala then populate listItems array  -->
+                </form>
+    </div>
+
+
+
+
+    <%- include("footer") -%>
